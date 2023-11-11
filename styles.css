@@ -551,6 +551,9 @@ label {
 }
 
 @media (max-width:600px) {
+  .card-text h1{
+    display: none;
+  }
   .grid-container {
     display:flex;
     flex-direction:column;
