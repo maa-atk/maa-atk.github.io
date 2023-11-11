@@ -14,6 +14,10 @@
   --left-card-frost:"#3D4F2B";
   --font-color:"#044d9a";
 }
+.x{
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+}
 .container-pfp{
   display: none;
 }
@@ -101,6 +105,7 @@ body,html {
 }
 .mini-grid {
   display:grid;
+  min-width: 1em;
   grid-template-columns:1fr 1fr;
   gap:20px;
 }
@@ -560,10 +565,7 @@ label {
 }
 
 @media (max-width:600px) {
-  .x{
-    padding-left: 1.5em;
-    padding-right: 1.5em;
-  }
+ 
   .logo {
     display: none;
   }
