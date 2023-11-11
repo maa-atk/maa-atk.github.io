@@ -561,7 +561,7 @@ label {
   .mini-grid {
     display:flex;
     flex-direction:column;
-    padding: 0 10px 10px 0;
+
   }
   .mini-grid1 {
     grid-template-columns:1fr;
