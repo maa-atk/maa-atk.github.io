@@ -14,6 +14,9 @@
   --left-card-frost:"#3D4F2B";
   --font-color:"#044d9a";
 }
+.container-pfp{
+  display: none;
+}
 body,html {
   margin:0;
   padding:0;
@@ -92,7 +95,9 @@ body,html {
   text-align:center;
 }
 .main-row {
-
+  display: flex;
+  flex-direction: column;
+  
 }
 .mini-grid {
   display:grid;
@@ -605,6 +610,45 @@ label {
   .timeline {
     display:none;
   }
+  .container-pfp{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-top: 2em;
+  }
+  .header{
+    display: none;
+  }
+  .main-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  .logo-container{
+    width:50px;
+    height:50px;
+    overflow:hidden;
+    
+  }
+  .card__border{
+    width:10em;
+    height:10em;
+    overflow:hidden;
+  }
+
+  .logo-containers {
+    display: inline-block;
+    
+  }
+  button {
+    background-color: transparent; 
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;    font-size: 1.5em;
+    border-radius: 40%;
+    width: 2em;
+    height: 2em;
+ 
+  }
 }
 
 
@@ -618,3 +662,8 @@ label {
     color: rgb(247, 215, 102);
   }
 }
+
+
+
+
+

@@ -1,12 +1,41 @@
 let slider = document.getElementById("slider");
 const faceLabel = document.getElementById("face-label");
 const body = document.body;
+let darkLightButton = document.getElementById("darkLightButton");
+
+const currentTheme = localStorage.getItem("theme");
+
+if (currentTheme == "dark") {
+  enableDarkMode();
+  slider.value = 1;
+  darkLightButton.textContent = "🌙";
+} else {
+  disableDarkMode();
+  darkLightButton.textContent = "🌞";
+}
 
 if (localStorage.getItem("preferredMode") === "dark") {
   enableDarkMode();
   slider.value = 1;
+  darkLightButton.textContent = "🌙";
 } else {
   disableDarkMode();
+  darkLightButton.textContent = "🌞";
+}
+
+darkLightButton.addEventListener("click", () => {
+  toggleDarkLightMode();
+});
+
+function toggleDarkLightMode() {
+  const currentMode = localStorage.getItem("preferredMode") || "light";
+  if (currentMode === "dark") {
+    disableDarkMode();
+    darkLightButton.textContent = "🌞";
+  } else {
+    darkLightButton.textContent = "🌙";
+    enableDarkMode();
+  }
 }
 
 slider.addEventListener("input", () => {
