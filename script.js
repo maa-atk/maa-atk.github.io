@@ -1,20 +1,41 @@
-let slider = document.getElementById("slider");
+const preferredMode = localStorage.getItem("preferredMode");
+const slider = document.getElementById("slider");
 const faceLabel = document.getElementById("face-label");
 const body = document.body;
-let darkLightButton = document.getElementById("darkLightButton");
-let logoImage = darkLightButton.querySelector(".logo1");
-const currentTheme = localStorage.getItem("theme");
+const darkLightButton = document.getElementById("darkLightButton");
+const logoImage = darkLightButton.querySelector(".logo1");
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+const defaultTheme = isMobile ? "dark" : "light";
 
-if (currentTheme == "dark") {
-  enableDarkMode();
-  slider.value = 1;
-} else {
-  disableDarkMode();
+if (!preferredMode) {
+  localStorage.setItem("preferredMode", defaultTheme);
 }
 
-if (localStorage.getItem("preferredMode") === "dark") {
-  enableDarkMode();
+function enableDarkMode() {
   slider.value = 1;
+  body.classList.remove("light-theme");
+  body.classList.add("dark-theme");
+  faceLabel.textContent = "🌙";
+  logoImage.src = "assets/svg/moon3.svg";
+  toggleStarsVisibility("dark");
+  toggleCloudsVisibility("dark");
+  checkColorMode("dark");
+  localStorage.setItem("preferredMode", "dark");
+}
+
+function disableDarkMode() {
+  body.classList.remove("dark-theme");
+  body.classList.add("light-theme");
+  faceLabel.textContent = "🌞";
+  logoImage.src = "assets/svg/sun3.svg";
+  toggleStarsVisibility("light");
+  toggleCloudsVisibility("light");
+  checkColorMode("light");
+  localStorage.setItem("preferredMode", "light");
+}
+
+if (preferredMode === "dark") {
+  enableDarkMode();
 } else {
   disableDarkMode();
 }
@@ -27,11 +48,10 @@ function toggleDarkLightMode() {
   const currentMode = localStorage.getItem("preferredMode") || "light";
   if (currentMode === "dark") {
     disableDarkMode();
-    logoImage.src = "assets/svg/sun3.svg";
+    localStorage.setItem("preferredMode", "light");
   } else {
-    logoImage.src = "assets/svg/moon3.svg";
-
     enableDarkMode();
+    localStorage.setItem("preferredMode", "dark");
   }
 }
 
@@ -72,27 +92,6 @@ function toggleCloudsVisibility(theme) {
   cloudContainer.style.display = theme === "light" ? "block" : "none";
 }
 
-function enableDarkMode() {
-  body.classList.add("dark-theme");
-  body.classList.remove("light-theme");
-  faceLabel.textContent = "🌙";
-  logoImage.src = "assets/svg/moon3.svg";
-  toggleStarsVisibility("dark");
-  toggleCloudsVisibility("dark");
-  checkColorMode("dark");
-  localStorage.setItem("preferredMode", "dark");
-}
-function disableDarkMode() {
-  body.classList.remove("dark-theme");
-  body.classList.add("light-theme");
-  faceLabel.textContent = "🌞";
-  logoImage.src = "assets/svg/sun3.svg";
-  toggleStarsVisibility("light");
-  toggleCloudsVisibility("light");
-  checkColorMode("light");
-  localStorage.setItem("preferredMode", "light");
-}
-
 // stars
 const darkThemeContainer = document.querySelector(".dark-theme .stars");
 darkThemeContainer.style.position = "fixed";
@@ -106,6 +105,7 @@ function adjustStarsBasedOnScreenWidth() {
 }
 
 adjustStarsBasedOnScreenWidth();
+
 for (let i = 0; i < numDarkThemeStars; i++) {
   const star = document.createElement("div");
   star.className = "star";
