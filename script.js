@@ -2,25 +2,21 @@ let slider = document.getElementById("slider");
 const faceLabel = document.getElementById("face-label");
 const body = document.body;
 let darkLightButton = document.getElementById("darkLightButton");
-
+let logoImage = darkLightButton.querySelector(".logo1");
 const currentTheme = localStorage.getItem("theme");
 
 if (currentTheme == "dark") {
   enableDarkMode();
   slider.value = 1;
-  darkLightButton.textContent = "🌙";
 } else {
   disableDarkMode();
-  darkLightButton.textContent = "🌞";
 }
 
 if (localStorage.getItem("preferredMode") === "dark") {
   enableDarkMode();
   slider.value = 1;
-  darkLightButton.textContent = "🌙";
 } else {
   disableDarkMode();
-  darkLightButton.textContent = "🌞";
 }
 
 darkLightButton.addEventListener("click", () => {
@@ -31,9 +27,10 @@ function toggleDarkLightMode() {
   const currentMode = localStorage.getItem("preferredMode") || "light";
   if (currentMode === "dark") {
     disableDarkMode();
-    darkLightButton.textContent = "🌞";
+    logoImage.src = "assets/svg/sun3.svg";
   } else {
-    darkLightButton.textContent = "🌙";
+    logoImage.src = "assets/svg/moon3.svg";
+
     enableDarkMode();
   }
 }
@@ -79,6 +76,7 @@ function enableDarkMode() {
   body.classList.add("dark-theme");
   body.classList.remove("light-theme");
   faceLabel.textContent = "🌙";
+  logoImage.src = "assets/svg/moon3.svg";
   toggleStarsVisibility("dark");
   toggleCloudsVisibility("dark");
   checkColorMode("dark");
@@ -88,6 +86,7 @@ function disableDarkMode() {
   body.classList.remove("dark-theme");
   body.classList.add("light-theme");
   faceLabel.textContent = "🌞";
+  logoImage.src = "assets/svg/sun3.svg";
   toggleStarsVisibility("light");
   toggleCloudsVisibility("light");
   checkColorMode("light");
@@ -100,8 +99,13 @@ darkThemeContainer.style.position = "fixed";
 darkThemeContainer.style.top = "0";
 darkThemeContainer.style.left = "0";
 
-const numDarkThemeStars = 100;
+let numDarkThemeStars = 100;
 
+function adjustStarsBasedOnScreenWidth() {
+  numDarkThemeStars = window.innerWidth <= 600 ? 20 : 100;
+}
+
+adjustStarsBasedOnScreenWidth();
 for (let i = 0; i < numDarkThemeStars; i++) {
   const star = document.createElement("div");
   star.className = "star";

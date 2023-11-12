@@ -1,12 +1,12 @@
 @font-face {
   font-family:'pixelsFont';
-  src:url('pixelsFont.ttf') format('truetype');
+  src:url('assets/fonts/pixelsFont.ttf') format('truetype');
   font-weight:normal;
   font-style:normal;
 }
 @font-face {
   font-family:'Montserrat';
-  src:url('Montserrat.ttf') format('truetype');
+  src:url('assets/fonts/Montserrat.ttf') format('truetype');
 }
 :root {
   --cloud-size:1em;
@@ -150,6 +150,9 @@ body,html {
 }
 .logo {
   transform:scale(1.44);
+}
+.logo1 {
+  transform:scale(1.2);
 }
 .class{
   display: none;
@@ -564,7 +567,7 @@ label {
   animation: neon 5s ease infinite;
 }
 
-@media (max-width:600px) {
+@media (max-width: 767px) {
  
   .logo {
     display: none;
